@@ -231,6 +231,10 @@ Order_detail,
 		^m(strDetail[count].od_item,m_handle)=count
 
 		xcall clear_box(detail_id,2,15,5,60)
+
+		if count.eq.max
+			call Extend_dynamic_memory
+
 	end
 
 	xcall delete_window(detail_id)
@@ -268,7 +272,7 @@ View_order,
 		if oh_number.eq.0
 			exitloop
 
-		if (%file_access(FileOp.ReadNext,hchan,header,oh_number).ne.FileResult.OK) then
+		if (%file_access(FileOp.Read,hchan,header,oh_number).ne.FileResult.OK) then
 			xcall display_message("Order not found!")
 		else
 		begin
@@ -284,8 +288,8 @@ View_order,
 
 			call view_order_detail
 
-			xcall clear_box(header_id,4,20,9,60)
-
+			xcall clear_box(header_id,4,20,7,60)
+			xcall clear_box(header_id,9,1,9,60)
 		end
 	end
 
