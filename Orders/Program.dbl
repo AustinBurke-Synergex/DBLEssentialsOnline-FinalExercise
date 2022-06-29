@@ -214,6 +214,10 @@ Order_detail,
 	begin
 
 		incr count
+		
+		if count > max
+			call Extend_dynamic_memory
+
 		xcall s_bld(temp,,"Order Detail (Entering item %d of %d)",count,max)
 		xcall w_brdr(detail_id,WB_TITLE,%atrim(temp))
 
@@ -232,8 +236,6 @@ Order_detail,
 
 		xcall clear_box(detail_id,2,15,5,60)
 
-		if count.eq.max
-			call Extend_dynamic_memory
 
 	end
 
